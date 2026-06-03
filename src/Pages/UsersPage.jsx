@@ -1,26 +1,37 @@
-import UsersList from "../Components/UsersList";
-import Login from "../Components/Login";
-import AddUserButton from "../Components/AddUserButton";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useContext } from "react";
-import { AuthContext } from "../Context/AuthContext.jsx";
+import UsersList from '../Components/UsersList'
+import AddUserButton from '../Components/AddUserButton'
+import { useQuery } from '@tanstack/react-query'
+import { fetchLibraries } from '../Services/LibrariesService'
 
 const UsersPage = () => {
-    const queryClient = new QueryClient();
-      
-    const { user } = useContext(AuthContext)
+  const {
+    data: libraries,
+    isLoading: librariesLoading,
+    isError: librariesError,
+  } = useQuery({
+    queryKey: ['libraries'],
+    queryFn: fetchLibraries,
+  })
 
-    return (
-        <QueryClientProvider client={queryClient}>
-            { user ?             
-             <div className="p-4">
-                <AddUserButton/>                
-                <UsersList />
-            </div>
-             : <Login/>
-            }
-        </QueryClientProvider>
-    );
+  return (
+    <div className="p-4">
+      <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+        <h2 className="text-lg font-semibold text-green-800">API protegida (JWT)</h2>
+        {librariesLoading && <p className="text-sm text-green-700">Cargando bibliotecas...</p>}
+        {librariesError && (
+          <p className="text-sm text-red-600">Error al acceder al endpoint protegido</p>
+        )}
+        {libraries && (
+          <p className="text-sm text-green-700">
+            Bibliotecas obtenidas con Bearer token: {libraries.length}
+          </p>
+        )}
+      </div>
+
+      <AddUserButton />
+      <UsersList />
+    </div>
+  )
 }
 
-export default UsersPage;
+export default UsersPage
