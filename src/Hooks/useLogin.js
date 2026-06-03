@@ -1,14 +1,8 @@
+import { useMutation } from '@tanstack/react-query'
+import { login } from '../Services/AuthService'
 
-export  function useLogin() {
-
-
-    const login = (email, password) => {
-        // Fake login check
-        if (email === "admin" && password === "1234") {        
-            return true;
-        }
-            return false;
-    };
-
-    return { login  };
+export function useLogin() {
+  return useMutation({
+    mutationFn: login,
+  })
 }

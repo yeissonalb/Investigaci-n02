@@ -1,12 +1,58 @@
-# React + Vite
+# Investigación 2 - JWT Auth (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend React + Vite con autenticación JWT contra el API backend.
 
-Currently, two official plugins are available:
+## Repositorios
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend:** https://github.com/yeissonalb/Investigaci-n02.git
+- **Backend:** https://github.com/yeissonalb/Investigaci-n002Backend.git
 
-## Expanding the ESLint configuration
+## Despliegue
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Entorno | URL |
+|---------|-----|
+| Frontend desplegado | _Pendiente: agregar URL de Netlify/Vercel_ |
+| API desplegada | _Pendiente: agregar URL del backend_ |
+
+## Desarrollo local
+
+1. Copiar variables de entorno:
+
+```bash
+cp .env.example .env
+```
+
+2. Instalar dependencias:
+
+```bash
+npm install
+```
+
+3. Iniciar frontend (puerto 5173):
+
+```bash
+npm run dev
+```
+
+4. Asegúrate de que el backend esté corriendo en `http://localhost:5219`.
+
+## Build de producción
+
+```bash
+npm run build
+npm run preview
+```
+
+## Credenciales de prueba
+
+- Email: `admin`
+- Password: `1234`
+
+## Flujo implementado
+
+- Login vía POST `/api/auth/login`
+- Token JWT guardado en `localStorage`
+- Header `Authorization: Bearer <token>` en peticiones protegidas
+- Rol `admin` leído desde el JWT decodificado
+- Ruta `/users` protegida (solo admin)
+- Persistencia de sesión al recargar la página
