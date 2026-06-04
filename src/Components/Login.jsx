@@ -32,7 +32,7 @@ export default function Login() {
     <div className="max-w-sm mx-auto mt-10 p-6 bg-gray-50 rounded-lg shadow">
       <form onSubmit={handleLogin}>
         <input
-          type="email"
+          type="text"
           placeholder="Correo"
           ref={emailRef}
           required
